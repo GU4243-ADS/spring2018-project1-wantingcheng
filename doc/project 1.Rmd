@@ -1,0 +1,69 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+
+library("xts")
+install.packages("dplyr")
+library('dplyr') # data manipulation
+# library('readr') # input/output
+# library('data.table') # data manipulation
+# install.packages('tibble')
+library('tibble') # data wrangling
+# library('tidyr') # data wrangling
+# library('stringr') # string manipulation
+# library('forcats') # factor manipulation
+
+
+# install.packages('tidytext')
+library('tidytext')
+# install.packages("magrittr")
+library('magrittr')
+# install.packages("tidyr")
+library("tidyr")
+# install.packages("ggplot2")
+library("ggplot2")
+
+```
+
+Data preparation
+
+```{r}
+
+setwd('/Users/wcheng/Desktop/Spring 2018/data science')
+# We want to treat each column as characters, not factors, except for the author column.
+spooky <- read.csv('spooky.csv', colClasses = 'character')
+spooky <- as.tibble(spooky)
+spooky$author <- as.factor(spooky$author)
+summary(spooky)
+
+```
+
+Tokenization
+```{r}
+# First use tidytext function to drop the punctuations and tokenize our file.
+data <- spooky %>%
+  unnest_tokens(word, text, token = "words", to_lower = TRUE, drop = TRUE)
+# Then we get rid of the stop words ("words that are not useful for an analysis, typically extremely common words such as “the”, “of”, “to”, and so forth in English.")
+# tidytext has a dictionary for stop words.
+data(stop_words)
+data <- data %>%
+  anti_join(stop_words, by = "word")
+
+frequency <- data %>% 
+  count(author, word) %>%
+  group_by(author) %>%
+  mutate(proportion = n / sum(n)) %>%
+  select(-n) %>%
+  spread(author, proportion) %>%
+  gather(author, proportion, c("EAP","MWS"))
+
+ggplot(frequency, aes(x = proportion, y = 'HPL'))
+
+
+```
+
+
+
