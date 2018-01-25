@@ -3,10 +3,13 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+1. Gender study of three authors
+2. 
+
 ```{r}
 
 library("xts")
-install.packages("dplyr")
+# install.packages("dplyr")
 library('dplyr') # data manipulation
 # library('readr') # input/output
 # library('data.table') # data manipulation
@@ -26,15 +29,17 @@ library("tidyr")
 # install.packages("ggplot2")
 library("ggplot2")
 
+# install.packages("plotly")
+library("plotly")
+
 ```
 
 Data preparation
 
 ```{r}
 
-setwd('/Users/wcheng/Desktop/Spring 2018/data science')
 # We want to treat each column as characters, not factors, except for the author column.
-spooky <- read.csv('spooky.csv', colClasses = 'character')
+spooky <- read.csv('../data/spooky.csv', colClasses = 'character')
 spooky <- as.tibble(spooky)
 spooky$author <- as.factor(spooky$author)
 summary(spooky)
@@ -42,25 +47,71 @@ summary(spooky)
 ```
 
 Tokenization
-```{r}
+```{r fig.keep="last"}
 # First use tidytext function to drop the punctuations and tokenize our file.
+pronouns <- c("him","she")
 data <- spooky %>%
-  unnest_tokens(word, text, token = "words", to_lower = TRUE, drop = TRUE)
+  unnest_tokens(word, text, token = "ngrams", n = 2, to_lower = TRUE, drop = TRUE)
 # Then we get rid of the stop words ("words that are not useful for an analysis, typically extremely common words such as “the”, “of”, “to”, and so forth in English.")
 # tidytext has a dictionary for stop words.
-data(stop_words)
-data <- data %>%
-  anti_join(stop_words, by = "word")
+# data(stop_words)
+# data <- data %>%
+#   anti_join(stop_words, by = "word")
 
-frequency <- data %>% 
-  count(author, word) %>%
-  group_by(author) %>%
-  mutate(proportion = n / sum(n)) %>%
-  select(-n) %>%
-  spread(author, proportion) %>%
-  gather(author, proportion, c("EAP","MWS"))
+data_counts <- data %>%
+  count(word, sort = TRUE) %>%
+  separate(word, c("word1","word2"), sep = " ", remove = TRUE) %>%
+  filter(word1 %in% pronouns) %>%
+  count(word1, word2, wt = n, sort = TRUE) %>%
+  rename(counts = "nn")
 
-ggplot(frequency, aes(x = proportion, y = 'HPL'))
+temp <- data.frame(
+  count(data_counts, word1)
+)
+ggplot(temp, aes(x="", y=n, fill=word1))+
+  geom_bar(width = 1, stat = "identity")+
+  coord_polar("y", start = 0)
+
+
+data_counts_by_author <- data %>%
+  count(author, word, sort = TRUE) %>%
+  separate(word, c("word1","word2"), sep = " ", remove = TRUE) %>%
+  filter(word1 %in% pronouns)
+
+MWS_po <- data_counts_by_author %>%
+  filter(author == "MWS") %>%
+  count(word1) %>%
+  rename(pronoun = "word1", counts = "nn")
+HPL_po <- data_counts_by_author %>%
+  filter(author == "HPL") %>%
+  count(word1) %>%
+  rename(pronoun = "word1", counts = "nn")
+EAP_po <- data_counts_by_author %>%
+  filter(author == "EAP") %>%
+  count(word1) %>%
+  rename(pronoun = "word1", counts = "nn")
+
+p1 <- ggplot(MWS_po, aes(x="", y=counts, fill=pronoun))+
+  geom_bar(width = 1, stat = "identity")+
+  coord_polar("y", start = 0)
+p2 <- ggplot(HPL_po, aes(x="", y=counts, fill=pronoun))+
+  geom_bar(width = 1, stat = "identity")+
+  coord_polar("y", start = 0)
+p3 <- ggplot(EAP_po, aes(x="", y=counts, fill=pronoun))+
+  geom_bar(width = 1, stat = "identity")+
+  coord_polar("y", start = 0)
+
+  
+
+# frequency <- data %>% 
+#   count(author, word) %>%
+#   group_by(author) %>%
+#   mutate(proportion = n / sum(n)) %>%
+#   select(-n) %>%
+#   spread(author, proportion) %>%
+#   gather(author, proportion, c("EAP","MWS"))
+# 
+# ggplot(frequency, aes(x = proportion, y = 'HPL'))
 
 
 ```
