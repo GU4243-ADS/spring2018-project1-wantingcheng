@@ -32,6 +32,8 @@ library("ggplot2")
 # install.packages("plotly")
 library("plotly")
 
+# install.packages("pamr")
+library("pamr")
 ```
 
 Data preparation
@@ -49,7 +51,7 @@ summary(spooky)
 Tokenization
 ```{r fig.keep="last"}
 # First use tidytext function to drop the punctuations and tokenize our file.
-pronouns <- c("him","she")
+pronouns <- c("he","she")
 data <- spooky %>%
   unnest_tokens(word, text, token = "ngrams", n = 2, to_lower = TRUE, drop = TRUE)
 # Then we get rid of the stop words ("words that are not useful for an analysis, typically extremely common words such as “the”, “of”, “to”, and so forth in English.")
@@ -72,11 +74,6 @@ ggplot(temp, aes(x="", y=n, fill=word1))+
   geom_bar(width = 1, stat = "identity")+
   coord_polar("y", start = 0)
 
-
-data_counts_by_author <- data %>%
-  count(author, word, sort = TRUE) %>%
-  separate(word, c("word1","word2"), sep = " ", remove = TRUE) %>%
-  filter(word1 %in% pronouns)
 
 MWS_po <- data_counts_by_author %>%
   filter(author == "MWS") %>%
@@ -113,8 +110,53 @@ p3 <- ggplot(EAP_po, aes(x="", y=counts, fill=pronoun))+
 # 
 # ggplot(frequency, aes(x = proportion, y = 'HPL'))
 
+word_ratios <- data_counts %>%
+    group_by(word2) %>%
+    filter(sum(counts) > 10) %>%
+    ungroup() %>%
+    spread(word1, counts, fill = 0) %>%
+    mutate_if(is.numeric, funs((. + 1) / sum(. + 1))) %>%
+    mutate(logratio = log2(she / he)) %>%
+    arrange(desc(logratio))   
 
+# Equally likely:
+word_ratios %>%
+  arrange(abs(logratio))
+
+# Large difference:
+word_ratios %>%
+    mutate(abslogratio = abs(logratio)) %>%
+    group_by(logratio < 0) %>%
+    top_n(15, abslogratio) %>%
+    ungroup() %>%
+    mutate(word = reorder(word2, logratio)) %>%
+    ggplot(aes(word, logratio, color = logratio < 0)) +
+    geom_segment(aes(x = word, xend = word,
+                     y = 0, yend = logratio), 
+                 size = 1.1, alpha = 0.6) +
+    geom_point(size = 3.5) +
+    coord_flip() +
+    labs(x = NULL, 
+         y = "Relative appearance after 'she' compared to 'he'",
+         title = "Words paired with 'he' and 'she'",
+         subtitle = "Women throw, sleep, and turn while men####") +
+    scale_color_discrete(name = "", labels = c("More 'she'", "More 'he'")) +
+    scale_y_continuous(breaks = seq(-3, 3),
+                       labels = c("0.125x", "0.25x", "0.5x", 
+                                  "Same", "2x", "4x", "8x"))
+
+data_counts_by_author <- data %>%
+  count(author, word, sort = TRUE) %>%
+  separate(word, c("word1","word2"), sep = " ", remove = TRUE) %>%
+  filter(word1 %in% pronouns)
 ```
 
+```{r}
+pamr.menu(data_counts)
+
+khan.data <- pamr.from.excel("../data/spooky.csv", 65, sample.labels=TRUE)
+
+
+```
 
 
