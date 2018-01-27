@@ -64,6 +64,7 @@ data_counts <- data %>%
   count(word, sort = TRUE) %>%
   separate(word, c("word1","word2"), sep = " ", remove = TRUE) %>%
   filter(word1 %in% pronouns) %>%
+  filter(word2 != "he") %>%
   count(word1, word2, wt = n, sort = TRUE) %>%
   rename(counts = "nn")
 
@@ -74,19 +75,25 @@ ggplot(temp, aes(x="", y=n, fill=word1))+
   geom_bar(width = 1, stat = "identity")+
   coord_polar("y", start = 0)
 
+data_counts_by_author <- data %>%
+  count(author, word, sort = TRUE) %>%
+  separate(word, c("word1","word2"), sep = " ", remove = TRUE) %>%
+  filter(word1 %in% pronouns) %>%
+  filter(word2 != "he") %>%
+  rename(counts = "n")
 
 MWS_po <- data_counts_by_author %>%
   filter(author == "MWS") %>%
   count(word1) %>%
-  rename(pronoun = "word1", counts = "nn")
+  rename(pronoun = "word1", counts = "n")
 HPL_po <- data_counts_by_author %>%
   filter(author == "HPL") %>%
   count(word1) %>%
-  rename(pronoun = "word1", counts = "nn")
+  rename(pronoun = "word1", counts = "n")
 EAP_po <- data_counts_by_author %>%
   filter(author == "EAP") %>%
   count(word1) %>%
-  rename(pronoun = "word1", counts = "nn")
+  rename(pronoun = "word1", counts = "n")
 
 p1 <- ggplot(MWS_po, aes(x="", y=counts, fill=pronoun))+
   geom_bar(width = 1, stat = "identity")+
@@ -145,17 +152,127 @@ word_ratios %>%
                        labels = c("0.125x", "0.25x", "0.5x", 
                                   "Same", "2x", "4x", "8x"))
 
-data_counts_by_author <- data %>%
-  count(author, word, sort = TRUE) %>%
-  separate(word, c("word1","word2"), sep = " ", remove = TRUE) %>%
-  filter(word1 %in% pronouns)
+
+# Separately:
+# EAP
+
+EAP_word_ratios <- data_counts_by_author %>%
+  filter(author == "EAP") %>%
+  group_by(word2) %>%
+  filter(sum(counts) > 5) %>%
+  ungroup() %>%
+  spread(word1, counts, fill = 0) %>%
+  mutate_if(is.numeric, funs((. +1)/ sum(. +1))) %>%
+  mutate(logratio = log2(she / he)) %>%
+  arrange(desc(logratio)) %>%
+  mutate(abslogratio = abs(logratio)) %>%
+  group_by(logratio < 0) %>%
+  top_n(15,abslogratio) %>%
+  ungroup() %>%
+  mutate(word = reorder(word2, logratio))
+
+ggplot(EAP_word_ratios, aes(word, logratio, color = logratio < 0)) +
+  geom_segment(aes(x=word, xend = word,
+                   y = 0, yend = logratio),
+               size = 1.1, alpha = 0.6) +
+  geom_point(size = 3.5) +
+  coord_flip() +
+  labs(x = NULL,
+       y = "Relative appearance after 'she' compared to 'he' in EAP's novels",
+       title = "Words paired with 'he' and 'she'") +
+  scale_color_discrete(name = "", labels = c("More 'she'", "More 'he'")) +
+  scale_y_continuous(breaks = seq(-3, 3),
+                     labels = c("0.125x", "0.25x", "0.5x", 
+                                "Same", "2x", "4x", "8x"))
+
+
+# HPL
+
+HPL_word_ratios <- data_counts_by_author %>%
+  filter(author == "HPL") %>%
+  group_by(word2) %>%
+  filter(sum(counts) > 5) %>%
+  ungroup() %>%
+  spread(word1, counts, fill = 0) %>%
+  mutate_if(is.numeric, funs((. +1)/ sum(. +1))) %>%
+  mutate(logratio = log2(she / he)) %>%
+  arrange(desc(logratio)) %>%
+  mutate(abslogratio = abs(logratio)) %>%
+  group_by(logratio < 0) %>%
+  top_n(15,abslogratio) %>%
+  ungroup() %>%
+  mutate(word = reorder(word2, logratio))
+
+ggplot(HPL_word_ratios, aes(word, logratio, color = logratio < 0)) +
+  geom_segment(aes(x=word, xend = word,
+                   y = 0, yend = logratio),
+               size = 1.1, alpha = 0.6) +
+  geom_point(size = 3.5) +
+  coord_flip() +
+  labs(x = NULL,
+       y = "Relative appearance after 'she' compared to 'he' in HPL's novels",
+       title = "Words paired with 'he' and 'she'") +
+  scale_color_discrete(name = "", labels = c("More 'she'", "More 'he'")) +
+  scale_y_continuous(breaks = seq(-3, 3),
+                     labels = c("0.125x", "0.25x", "0.5x", 
+                                "Same", "2x", "4x", "8x"))
+  
+# MWS
+
+MWS_word_ratios <- data_counts_by_author %>%
+  filter(author == "MWS") %>%
+  group_by(word2) %>%
+  filter(sum(counts) > 5) %>%
+  ungroup() %>%
+  spread(word1, counts, fill = 0) %>%
+  mutate_if(is.numeric, funs((. +1)/ sum(. +1))) %>%
+  mutate(logratio = log2(she / he)) %>%
+  arrange(desc(logratio)) %>%
+  mutate(abslogratio = abs(logratio)) %>%
+  group_by(logratio < 0) %>%
+  top_n(15,abslogratio) %>%
+  ungroup() %>%
+  mutate(word = reorder(word2, logratio))
+
+ggplot(MWS_word_ratios, aes(word, logratio, color = logratio < 0)) +
+  geom_segment(aes(x=word, xend = word,
+                   y = 0, yend = logratio),
+               size = 1.1, alpha = 0.6) +
+  geom_point(size = 3.5) +
+  coord_flip() +
+  labs(x = NULL,
+       y = "Relative appearance after 'she' compared to 'he' in MWS's novels",
+       title = "Words paired with 'he' and 'she'") +
+  scale_color_discrete(name = "", labels = c("More 'she'", "More 'he'")) +
+  scale_y_continuous(breaks = seq(-3, 3),
+                     labels = c("0.125x", "0.25x", "0.5x", 
+                                "Same", "2x", "4x", "8x"))
+    
+
 ```
 
 ```{r}
-pamr.menu(data_counts)
+gender <- data_counts_by_author %>%
+  spread(word1, counts, fill = 0)
+temp_male <- gender %>%
+  spread(word2, he, fill = 0) %>%
+  group_by(author) %>%
+  summarise_if(is.numeric,sum) %>%
+  ungroup() %>%
+  rename(gender = "she") %>%
+  mutate(gender = "male")
+temp_female <- gender %>%
+  spread(word2, she, fill = 0) %>%
+  group_by(author) %>%
+  summarise_if(is.numeric,sum) %>%
+  ungroup() %>%
+  rename(gender = "he") %>%
+  mutate(gender = "female")
+gender <- rbind(temp_male, temp_female)
 
-khan.data <- pamr.from.excel("../data/spooky.csv", 65, sample.labels=TRUE)
-
+write.table(gender, "../data/pam.txt", sep = "\t")
+gender.data <- pamr.from.excel("../data/pam.txt", ncols = 1136, sample.labels = TRUE)
+temp <- read.table("../data/khan.txt", sep = "\t")
 
 ```
 
