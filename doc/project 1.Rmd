@@ -269,10 +269,22 @@ temp_female <- gender %>%
   rename(gender = "he") %>%
   mutate(gender = "female")
 gender <- rbind(temp_male, temp_female)
+gender$author <- as.character(gender$author)
+first_row <- c("","",rep("sample", 1134) %>%
+  paste0(1:1134))
+second_row <- c("", "", colnames(gender)[-c(1,2)])
+gender <- rbind(first_row,second_row, gender) %>%
+  as.matrix()
+colnames(gender) <- NULL
+gender <- t(gender)
 
-write.table(gender, "../data/pam.txt", sep = "\t")
-gender.data <- pamr.from.excel("../data/pam.txt", ncols = 1136, sample.labels = TRUE)
-temp <- read.table("../data/khan.txt", sep = "\t")
+write.table(gender, "../data/pam.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
+gender.data <- pamr.from.excel("../data/pam.txt", ncols = 8, sample.labels = TRUE)
+
+
+# khan.data <- pamr.from.excel("../data/khan.txt", ncols = 65, sample.labels = TRUE)
+pamr.menu(gender.data)
+
 
 ```
 
