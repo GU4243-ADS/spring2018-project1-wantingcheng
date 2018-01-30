@@ -11,7 +11,7 @@ Term: Spring 2018
 
 + Project summary: In this project, I explore the relationship between character gender and character actions in the context of horror stories written in the 19th century by three authors. I study the ratio of male vs. female in each author, the popular action words associated with male and female characters, and use clustering methods to analyze the difference in the portrayal of gender roles.
 
-##1. Introduction and Data
+## 1. Introduction and Data
   I've always been interested in whether authors portray their male and female characters differently, and have taken classes where the professor discussed how gender roles are largely different in the 19th century. This project provides me with a great opportunity to approach this question from a more quantitative perspective. In particular, I'm also curius about whether the gender of the author make a difference on how s/he depict gender roles, since we have two male authors (EAP, HPL) and one female author (MWS). 
   This project seeks to answer the following questions:
   + How does the occurence of pronouns look? Does the female author talk more about female characters?
