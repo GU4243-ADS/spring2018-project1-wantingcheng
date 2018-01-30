@@ -105,6 +105,8 @@ p3 <- ggplot(EAP_po, aes(x="", y=counts, fill=pronoun))+
   geom_bar(width = 1, stat = "identity")+
   coord_polar("y", start = 0)
 
+layout <- matrix(c(1,2,3), 3, 1, byrow = TRUE)
+multiplot(p1, p2, p3, layout = layout)
   
 
 # frequency <- data %>% 
@@ -247,9 +249,63 @@ ggplot(MWS_word_ratios, aes(word, logratio, color = logratio < 0)) +
   scale_y_continuous(breaks = seq(-3, 3),
                      labels = c("0.125x", "0.25x", "0.5x", 
                                 "Same", "2x", "4x", "8x"))
-    
+
 
 ```
+
+
+
+```{r}
+# class material
+
+# How to save the images in figs folder
+png("../figs/graph1.png")
+ggplot(MWS_word_ratios, aes(word, logratio, color = logratio < 0)) +
+  geom_segment(aes(x=word, xend = word,
+                   y = 0, yend = logratio),
+               size = 1.1, alpha = 0.6) +
+  geom_point(size = 3.5) +
+  coord_flip() +
+  labs(x = NULL,
+       y = "Relative appearance after 'she' compared to 'he' in MWS's novels",
+       title = "Words paired with 'he' and 'she'") +
+  scale_color_discrete(name = "", labels = c("More 'she'", "More 'he'")) +
+  scale_y_continuous(breaks = seq(-3, 3),
+                     labels = c("0.125x", "0.25x", "0.5x", 
+                                "Same", "2x", "4x", "8x"))
+dev.off()
+```
+# Future directions for research
+data cleaning:
+1. Look at type of sentence, punctuations
+2. n-gram instead of words; groups of words that represent a theme
+3. length of sentence in words; types of words like nouns, adjectives, etc.
+4. stemming/tization
+5. any information in the stop words; 
+6. studying the first and last words in the sentences
+7. HPL makes up a lot of words
+8. can we find specifically "british", "french" words for ms
+9. Sentence generation
+
+sentiment analysis:
+1. sentiment analysis at sentence level instead of word level. What proportion of the sentence is positive?
+2. k-means clusters on emotion, counts, or sentence. 
+3. Are the results from the other lexicons different?
+4. We're looking at the word counts for each emotion... is there some sort of normalization important here? eg. number of negative words in single sentence
+5. What are the top few emotions represented by each author and are they the same across the authors?
+6. Psycho profiles of the authors.
+
+topic modeling:
+1. visualizing author topics
+2. determining the number of topics
+3. topic model it at the corpus level, instead of sentence level.
+4. other algorithms other than LDA
+5. 
+
+
+**clustering analysis
+
+
 
 ```{r}
 gender <- data_counts_by_author %>%
@@ -283,7 +339,10 @@ gender.data <- pamr.from.excel("../data/pam.txt", ncols = 8, sample.labels = TRU
 
 
 # khan.data <- pamr.from.excel("../data/khan.txt", ncols = 65, sample.labels = TRUE)
-pamr.menu(gender.data)
+gender.train <- pamr.train(gender.data)
+gender.cv <- pamr.cv(gender.train, gender.data)
+pamr.plotcvprob(gender.train, gender.cv, 7)
+
 
 
 ```
