@@ -15,7 +15,9 @@ Term: Spring 2018
   I've always been interested in whether authors portray their male and female characters differently, and have taken classes where the professor discussed how gender roles are largely different in the 19th century. This project provides me with a great opportunity to approach this question from a more quantitative perspective. In particular, I'm also curius about whether the gender of the author make a difference on how s/he depict gender roles, since we have two male authors (EAP, HPL) and one female author (MWS). 
   This project seeks to answer the following questions:
   + How does the occurence of pronouns look? Does the female author talk more about female characters?
+  
   + Which verbs or words are most associated with male and female characters? What do male and female characters do in novels written by each author?
+  
   + Is there a way to guess the gender of the character given a word, a token, a sentence?
   
   
