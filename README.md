@@ -6,7 +6,8 @@ This is the first and only *individual* (as opposed to *team*) this semester.
 
 Term: Spring 2018
 
-+ Project title: Understanding gender roles in the 19th century horror novels 
-+ This project is conducted by Wanting Cheng, Columbia UNI: wc2628
++ Project title: Understanding gender and character actions in the 19th century horror novels 
++ This project is conducted by Wanting Cheng, Columbia(UNI: wc2628)
 
-+ Project summary: This project is to study the number of the words, the style of the speech and the positive/negative emotion used between extroverted and introverted presidents. Finally, summarize the most often used words by extroverted presidents using topic modeling.
++ Project summary: In this project, I explore the relationship between character gender and character actions in the context of horror stories written in the 19th century by three authors. I study the ratio of male vs. female in each author, the popular action words associated with male and female characters, and use clustering methods to analyze the difference in the portrayal of gender.
+
