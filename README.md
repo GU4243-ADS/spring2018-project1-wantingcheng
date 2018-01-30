@@ -20,4 +20,7 @@ Term: Spring 2018
   
   + Is there a way to guess the gender of the character given a word, a token, a sentence?
   
+  Regarding Spooky data, we are given 19579 sentences in total, each written by an author among  Edgar Allan Poe (EAP), HP Lovecraft (HPL), and Mary Shelley (MWS). In the data file, EAP has 7900 sentences, HPL has 5635 sentences, and MWS has 6044. For this study I defined two classes of pronouns: the male pronouns were "he" and the female pronouns were "she". I then used tidy data principles and n-grams to get the word following the pronouns, and treated them as the character actions.
+
+## 2.
   
