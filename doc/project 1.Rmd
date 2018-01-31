@@ -3,8 +3,7 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-1. Gender study of three authors
-2. 
+## 1. Data Preparation
 
 ```{r}
 
@@ -38,7 +37,7 @@ library("pamr")
 source("../lib/multiplot.R")
 ```
 
-Data preparation
+
 
 ```{r}
 
@@ -50,7 +49,7 @@ summary(spooky)
 
 ```
 
-Tokenization
+## 2. Pronoun Occurence 
 ```{r fig.keep="last"}
 # First use tidytext function to drop the punctuations and tokenize our file.
 # We use bigrams because we want the word following the pronouns "he" and "she".
@@ -123,7 +122,7 @@ dev.off()
 ```
 
 
-
+## 3. Gender Actions
 ```{r}
 
 word_ratios <- data_counts %>%

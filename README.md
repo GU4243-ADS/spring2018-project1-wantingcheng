@@ -12,6 +12,7 @@ Term: Spring 2018
 + Project summary: In this project, I explore the relationship between character gender and character actions in the context of horror stories written in the 19th century by three authors. I study the ratio of male vs. female in each author, the popular action words associated with male and female characters, and use clustering methods to analyze the difference in the portrayal of gender roles.
 
 ## 1. Introduction and Data
+
   I've always been interested in whether authors portray their male and female characters differently, and have taken classes where the professor discussed how gender roles are largely different in the 19th century. This project provides me with a great opportunity to approach this question from a more quantitative perspective. In particular, I'm also curius about whether the gender of the author make a difference on how s/he depict gender roles, since we have two male authors (EAP, HPL) and one female author (MWS). 
   
   This project seeks to answer the following questions:
@@ -33,7 +34,7 @@ Term: Spring 2018
 
   From the pie chart, it is obvious that the red occupies almost 3/4 of the pie, representing the number of times in total that "he" comes up in the corpus. 
   
-  *I removed bigrams of "he he" because it seems that EAP likes to mimic character laughing as "he he he". In this context, "he" shouldn't be considered as a pronoun.*
+  *Note: I removed bigrams of "he he" because it seems that EAP likes to mimic character laughing as "he he he". In this context, "he" shouldn't be considered as a pronoun.*
   
   I find:
   + The inbalance in occurence of male and female pronouns. It seems that aggregately male characters are more often brought up in the horror stories written by the three authors.
@@ -47,6 +48,10 @@ Term: Spring 2018
   + MWS, as a female write, has the most balanced usage the pronouns. However, the appearance of "he" is still more frequent than that of "she".
   + HPL seems to favor male characters much more than female characters, as he writes "she" for only 38 times and "he" for 461 times.
   + Still, had I included more gender pronouns or indicators, the results might have more detailed implications.
+
+
+## 3. Gender actions
+
   
   
   
