@@ -34,6 +34,8 @@ library("plotly")
 
 # install.packages("pamr")
 library("pamr")
+
+source("../lib/multiplot.R")
 ```
 
 Data preparation
@@ -51,14 +53,11 @@ summary(spooky)
 Tokenization
 ```{r fig.keep="last"}
 # First use tidytext function to drop the punctuations and tokenize our file.
+# We use bigrams because we want the word following the pronouns "he" and "she".
 pronouns <- c("he","she")
 data <- spooky %>%
   unnest_tokens(word, text, token = "ngrams", n = 2, to_lower = TRUE, drop = TRUE)
-# Then we get rid of the stop words ("words that are not useful for an analysis, typically extremely common words such as “the”, “of”, “to”, and so forth in English.")
-# tidytext has a dictionary for stop words.
-# data(stop_words)
-# data <- data %>%
-#   anti_join(stop_words, by = "word")
+
 
 data_counts <- data %>%
   count(word, sort = TRUE) %>%
@@ -68,12 +67,20 @@ data_counts <- data %>%
   count(word1, word2, wt = n, sort = TRUE) %>%
   rename(counts = "nn")
 
-temp <- data.frame(
+all_po <- data.frame(
   count(data_counts, word1)
 )
-ggplot(temp, aes(x="", y=n, fill=word1))+
+all_po <- all_po %>%
+  rename(counts = "n",
+         pronouns = "word1")
+
+png("../figs/po1.png")
+ggplot(all_po, aes(x="", y=counts, fill=pronouns))+
   geom_bar(width = 1, stat = "identity")+
-  coord_polar("y", start = 0)
+  coord_polar("y", start = 0) +
+  ggtitle("pronoun occurence in total")
+
+dev.off()
 
 data_counts_by_author <- data %>%
   count(author, word, sort = TRUE) %>%
@@ -97,27 +104,27 @@ EAP_po <- data_counts_by_author %>%
 
 p1 <- ggplot(MWS_po, aes(x="", y=counts, fill=pronoun))+
   geom_bar(width = 1, stat = "identity")+
-  coord_polar("y", start = 0)
+  coord_polar("y", start = 0) +
+  ggtitle("MWS pronoun occurence")
 p2 <- ggplot(HPL_po, aes(x="", y=counts, fill=pronoun))+
   geom_bar(width = 1, stat = "identity")+
-  coord_polar("y", start = 0)
+  coord_polar("y", start = 0) +
+  ggtitle("HPL pronoun occurence")
 p3 <- ggplot(EAP_po, aes(x="", y=counts, fill=pronoun))+
   geom_bar(width = 1, stat = "identity")+
-  coord_polar("y", start = 0)
+  coord_polar("y", start = 0) +
+  ggtitle("EAP pronoun occurence")
 
-layout <- matrix(c(1,2,3), 3, 1, byrow = TRUE)
+layout <- matrix(c(1,2,3), 3,1, byrow = TRUE)
+png("../figs/po2.png")
 multiplot(p1, p2, p3, layout = layout)
-  
+dev.off()
 
-# frequency <- data %>% 
-#   count(author, word) %>%
-#   group_by(author) %>%
-#   mutate(proportion = n / sum(n)) %>%
-#   select(-n) %>%
-#   spread(author, proportion) %>%
-#   gather(author, proportion, c("EAP","MWS"))
-# 
-# ggplot(frequency, aes(x = proportion, y = 'HPL'))
+```
+
+
+
+```{r}
 
 word_ratios <- data_counts %>%
     group_by(word2) %>%
