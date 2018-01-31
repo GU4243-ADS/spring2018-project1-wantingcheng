@@ -13,7 +13,9 @@ Term: Spring 2018
 
 ## 1. Introduction and Data
   I've always been interested in whether authors portray their male and female characters differently, and have taken classes where the professor discussed how gender roles are largely different in the 19th century. This project provides me with a great opportunity to approach this question from a more quantitative perspective. In particular, I'm also curius about whether the gender of the author make a difference on how s/he depict gender roles, since we have two male authors (EAP, HPL) and one female author (MWS). 
+  
   This project seeks to answer the following questions:
+  
   + How does the occurence of pronouns look? Does the female author talk more about female characters?
   
   + Which verbs or words are most associated with male and female characters? What do male and female characters do in novels written by each author?
@@ -24,6 +26,7 @@ Term: Spring 2018
 
 ## 2. Pronoun Occurence
   As I considered this topic, the first questions that came to my mind is: Are female authors more likely to mention female characters in their novels? What are the ratio of pronoun occurence of each authors?
+  
   Here I plot the pronoun occurence of all authors:
   
 ![image](figs/po1.png)
@@ -40,6 +43,10 @@ Term: Spring 2018
 
 ![image](figs/po2.png)
   
+  I find:
+  + MWS, as a female write, has the most balanced usage the pronouns. However, the appearance of "he" is still more frequent than that of "she".
+  + HPL seems to favor male characters much more than female characters, as he writes "she" for only 38 times and "he" for 461 times.
+  + Still, had I included more gender pronouns or indicators, the results might have more detailed implications.
   
   
   
