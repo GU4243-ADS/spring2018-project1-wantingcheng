@@ -74,15 +74,26 @@ Term: Spring 2018
   
   + These words are the most different in how the three authors used them with the pronouns “he” and “she”. Women in horror novels in the 19th century do things like throw, sleep, turn, give, continue, fall, cry, and try. In contrast, men in these novels do things like draw, find, hold, say, wish, and begin.
   
-  + There are a lot of words in the male category, like "may", "shall", "can", that doesn't relate to specific action. It's reasonable to guess that male characters are more frequently portrayed from a _first person_ perspective. If time permits, I should have included the word following such auxiliary verbs, to have a better idea of what men tend to do.
+  + There are a lot of words in the male category, like "may", "shall", "can", that doesn't relate to specific action. It's reasonable to guess that male characters are more frequently portrayed from a **first person** perspective. If time permits, I should have included the word following such auxiliary verbs, to have a better idea of what men tend to do.
+  
+  + Whereas female tends to have past tense in their action words, male have more present tense words such as "may" and "can".
   
   Since I am also interested in how the three authors depict their characters differently in the perspective of gender, I applied the same method on the three authors separately and graphed the results.
   
   
-* EAP action words
++ EAP action words
   
 ![image](figs/EAPverbs.jpeg)
   
+  
++ HPL action words
+  
+![image](figs/HPLverbs.jpeg)
+  
+  
++ MWS action words
+  
+![image](figs/MWSverbs.jpeg)
   
   
   

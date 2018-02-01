@@ -34,6 +34,8 @@ library("plotly")
 # install.packages("pamr")
 library("pamr")
 
+library(wordcloud)
+
 source("../lib/multiplot.R")
 ```
 
@@ -135,10 +137,17 @@ word_ratios <- data_counts %>%
     arrange(desc(logratio))   
 
 # Equally likely:
-word_ratios %>%
-  arrange(abs(logratio))
+equal <- word_ratios %>%
+  mutate(abslogratio = abs(logratio)) %>%
+  arrange(abslogratio)
+words <- equal$word2
+freqs <- equal$abslogratio
+
+wordcloud(words, freqs, max.words = 14, min.freq = -0.25, scale = c(4,.5), vfont = c("sans serif","plain"), color = c("purple4", "red4", "black"))
 
 # Large difference:
+
+png("../figs/verbs1.png")
 word_ratios %>%
     mutate(abslogratio = abs(logratio)) %>%
     group_by(logratio < 0) %>%
@@ -159,7 +168,7 @@ word_ratios %>%
     scale_y_continuous(breaks = seq(-3, 3),
                        labels = c("0.125x", "0.25x", "0.5x", 
                                   "Same", "2x", "4x", "8x"))
-
+dev.off()
 
 # Separately:
 # EAP
@@ -179,6 +188,7 @@ EAP_word_ratios <- data_counts_by_author %>%
   ungroup() %>%
   mutate(word = reorder(word2, logratio))
 
+jpeg("../figs/EAPverbs.jpeg", quality = 100)
 ggplot(EAP_word_ratios, aes(word, logratio, color = logratio < 0)) +
   geom_segment(aes(x=word, xend = word,
                    y = 0, yend = logratio),
@@ -192,7 +202,7 @@ ggplot(EAP_word_ratios, aes(word, logratio, color = logratio < 0)) +
   scale_y_continuous(breaks = seq(-3, 3),
                      labels = c("0.125x", "0.25x", "0.5x", 
                                 "Same", "2x", "4x", "8x"))
-
+dev.off()
 
 # HPL
 
@@ -211,6 +221,7 @@ HPL_word_ratios <- data_counts_by_author %>%
   ungroup() %>%
   mutate(word = reorder(word2, logratio))
 
+jpeg("../figs/HPLverbs.jpeg", quality = 100)
 ggplot(HPL_word_ratios, aes(word, logratio, color = logratio < 0)) +
   geom_segment(aes(x=word, xend = word,
                    y = 0, yend = logratio),
@@ -224,7 +235,8 @@ ggplot(HPL_word_ratios, aes(word, logratio, color = logratio < 0)) +
   scale_y_continuous(breaks = seq(-3, 3),
                      labels = c("0.125x", "0.25x", "0.5x", 
                                 "Same", "2x", "4x", "8x"))
-  
+dev.off()
+ 
 # MWS
 
 MWS_word_ratios <- data_counts_by_author %>%
@@ -242,6 +254,7 @@ MWS_word_ratios <- data_counts_by_author %>%
   ungroup() %>%
   mutate(word = reorder(word2, logratio))
 
+jpeg("../figs/MWSverbs.jpeg", quality = 100)
 ggplot(MWS_word_ratios, aes(word, logratio, color = logratio < 0)) +
   geom_segment(aes(x=word, xend = word,
                    y = 0, yend = logratio),
@@ -255,7 +268,7 @@ ggplot(MWS_word_ratios, aes(word, logratio, color = logratio < 0)) +
   scale_y_continuous(breaks = seq(-3, 3),
                      labels = c("0.125x", "0.25x", "0.5x", 
                                 "Same", "2x", "4x", "8x"))
-
+dev.off()
 
 ```
 
