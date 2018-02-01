@@ -63,12 +63,17 @@ Term: Spring 2018
 ![image]
 
 
-  Next, I ranked the words that have largest absolute value of their log ratios - these are the words that are perceived as associated with male or female characters.
+  Next, I ranked the words that have largest absolute value of their log ratios - these are the words that are perceived as associated with male or female characters, disregarding which author wrote such words.
   
 ![image]
 
 
-
+  I find:
+  +
+  +
+  
+  
+  
   
   
   
