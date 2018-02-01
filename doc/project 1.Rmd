@@ -274,26 +274,7 @@ dev.off()
 
 
 
-```{r}
-# class material
 
-# How to save the images in figs folder
-png("../figs/graph1.png")
-ggplot(MWS_word_ratios, aes(word, logratio, color = logratio < 0)) +
-  geom_segment(aes(x=word, xend = word,
-                   y = 0, yend = logratio),
-               size = 1.1, alpha = 0.6) +
-  geom_point(size = 3.5) +
-  coord_flip() +
-  labs(x = NULL,
-       y = "Relative appearance after 'she' compared to 'he' in MWS's novels",
-       title = "Words paired with 'he' and 'she'") +
-  scale_color_discrete(name = "", labels = c("More 'she'", "More 'he'")) +
-  scale_y_continuous(breaks = seq(-3, 3),
-                     labels = c("0.125x", "0.25x", "0.5x", 
-                                "Same", "2x", "4x", "8x"))
-dev.off()
-```
 # Future directions for research
 data cleaning:
 1. Look at type of sentence, punctuations
@@ -357,9 +338,15 @@ write.table(gender, "../data/pam.txt", sep = "\t", row.names = FALSE, col.names 
 gender.data <- pamr.from.excel("../data/pam.txt", ncols = 8, sample.labels = TRUE)
 
 
-# khan.data <- pamr.from.excel("../data/khan.txt", ncols = 65, sample.labels = TRUE)
+khan.data <- pamr.from.excel("../data/khan.txt", ncols = 65, sample.labels = TRUE)
+khan.train <- pamr.train(khan.data)
+pamr.cv(khan.train, khan.data)
+pamr.scales <- pamr.adaptthresh(khan.train)
+
+
 gender.train <- pamr.train(gender.data)
 gender.cv <- pamr.cv(gender.train, gender.data)
+pamr.confusion(gender.train, 2.3)
 pamr.plotcvprob(gender.train, gender.cv, 7)
 
 
