@@ -76,7 +76,9 @@ Term: Spring 2018
   
   + There are a lot of words in the male category, like "may", "shall", "can", that doesn't relate to specific action. If time permits, I should have included the word following such auxiliary verbs, to have a better idea of what men tend to do.
   
+  Since I am also interested in how the three authors depict their characters differently in the perspective of gender, I applied the same method on the three authors separately and graphed the results.
   
+![image](figs/EAPverbs.jpeg)
   
   
   
