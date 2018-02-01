@@ -54,7 +54,7 @@ Term: Spring 2018
 ## 3. Gender actions
   To analyze what male and female characters typically do and don't do, I take a closer look at the action verb or modifiers associated with the pronouns. Some papers used dependency parsing, but for the time sake I simply used bigrams to achieve the similar effect. The second word of the bigrams that start with "he" or "she" are mostly verbs, the main thing I'm interested in. After getting a list of the words following "he" or "she" as well as the number of times it appears, I used a simple function to represent the relative usage for "she" and "he".
   
-  $log ratio = log2(# of times used after "she"\# of times used after "he")$
+  'log ratio = log2(# of times used after "she" \ # of times used after "he")'
   
   Therefore, the larger the log ratio, the stronger "relationship" between the word and "she", or the more indicative the word is describing a female character. On the other hand, the smaller the log ratio, the more possibility that there is a significant relationship between the word and male character. 
   
@@ -96,8 +96,19 @@ Term: Spring 2018
 ![image](figs/MWSverbs.jpeg)
   
   
+  I find:
   
+  +
   
+  +
+  
+  +
+  
+
+## 4. Experiments Using Gene Classifier
+
+  Enlighed by this paper [quote], I ran a series of classification esperiments using the nearest shrunken centroids classifier (NSC). I chose this classifier because, as Jockers and Kirilloff	mention in their research, The NSC classifier has the advantage of being a highly interpretable classifier. 
+  it not only returns class predictions and the probabilities associated with those predictions, but it performs feature selection and provides statistical data about which features were found to be most useful in the overall classification and which classes those features are most or least associated with.
   
   
   
