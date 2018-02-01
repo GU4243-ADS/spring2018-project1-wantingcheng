@@ -65,12 +65,18 @@ Term: Spring 2018
 
   Next, I ranked the words that have largest absolute value of their log ratios - these are the words that are perceived as associated with male or female characters, disregarding which author wrote such words.
   
-![image]
+![image](figs/verbs1.png)
 
+
+  The words marked with red lines are the ones with highest log ratios, meaning that although it frequently appears after both pronouns, the comparative usage of such words after "she" is much more frequent than after "he". The ticks on the x-axis represent how many times the word is used after "she" than "he". "0.25x" means that the word follows "he" 4 times more than it follows "she".
 
   I find:
-  +
-  +
+  
+  + These words are the most different in how the three authors used them with the pronouns “he” and “she”. Women in horror novels in the 19th century do things like throw, sleep, turn, give, continue, fall, cry, and try. In contrast, men in these novels do things like draw, find, hold, say, wish, and begin.
+  
+  + There are a lot of words in the male category, like "may", "shall", "can", that doesn't relate to specific action. If time permits, I should have included the word following such auxiliary verbs, to have a better idea of what men tend to do.
+  
+  
   
   
   
