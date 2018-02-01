@@ -107,10 +107,11 @@ Term: Spring 2018
 
 ## 4. Experiments Using Gene Classifier
 
-  Enlighed by this paper [quote], I ran a series of classification esperiments using the nearest shrunken centroids classifier (NSC). I chose this classifier because, as Jockers and Kirilloff	mention in their research, The NSC classifier has the advantage of being a highly interpretable classifier. 
+  The analysis in part 3 used a rather simple functon to represent the relative use of words, that might distinguish between the characters of male and female. But I wonder if there are more subtle ways to distinguish between these verbs. Enlighed by this paper [quote], I ran a series of classification esperiments using the nearest shrunken centroids classifier (NSC). I chose this classifier because, as Jockers and Kirilloff	mention in their research, The NSC classifier has the advantage of being a highly interpretable classifier. 
+  
 >  It not only returns class predictions and the probabilities associated with those predictions, but it performs feature selection and provides statistical data about which features were found to be most useful in the overall classification and which classes those features are most or least associated with.
   
-  
+  Eventually, I want to reach the goal of distinguishing between verbs that showed little value in separating the two gender and verbs that showed a strong association with one class or the other.
   
   
   
