@@ -124,6 +124,8 @@ Term: Spring 2018
 ![chart](figs/data.png)
 
   This is a dataframe with 8 columns and 1136 rows, with 1134 words serving as classification features of gender class.
+  
+### 4.2 
 
 
   

@@ -337,35 +337,23 @@ gender <- rbind(first_row,second_row, gender) %>%
 colnames(gender) <- NULL
 gender <- t(gender)
 
-write.table(gender, "../data/pam.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
-gender.data <- pamr.from.excel("../data/pam.txt", ncols = 8, sample.labels = TRUE)
+# Draw a graph of the table to get an idea of how it looks like
 temp <- tableGrob(head(gender))
 grid.newpage()
 png("../figs/data.png")
 grid.draw(temp)
 dev.off()
 
-
-# khan.data <- pamr.from.excel("../data/khan.txt", ncols = 65, sample.labels = TRUE)
-# khan.train <- pamr.train(khan.data)
-# khan.results <- pamr.cv(khan.train, khan.data)
-# pamr.plotcv(khan.results)
-# pamr.confusion(khan.results, threshold=4)
-# pamr.plotcvprob(khan.results, khan.data, threshold=4.0)
-# pamr.plotcen(khan.train, khan.data, threshold=4.0)
-# pamr.geneplot(khan.train, khan.data, threshold=5.3)
-
-
-
-
-
-
+write.table(gender, "../data/pam.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
+gender.data <- pamr.from.excel("../data/pam.txt", ncols = 8, sample.labels = TRUE)
+# train the model
 gender.train <- pamr.train(gender.data)
 gender.results <- pamr.cv(gender.train, gender.data)
 
 ## Plot the cross-validated error curves
-png("../figs/graph1.png")
+png("../figs/cv.png")
 pamr.plotcv(gender.results)
+dev.off()
 
 ## Compute the confusion matrix for a particular model (threshold=7.0) 
 pamr.confusion(gender.results, threshold=7.0)
