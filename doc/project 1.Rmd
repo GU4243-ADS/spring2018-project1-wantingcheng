@@ -355,15 +355,23 @@ png("../figs/cv.png")
 pamr.plotcv(gender.results)
 dev.off()
 
-## Compute the confusion matrix for a particular model (threshold=7.0) 
-pamr.confusion(gender.results, threshold=7.0)
+
+
+```
+
+
+```{r}
+## Compute the confusion matrix for a particular model (threshold=7.0)
+pamr.confusion(gender.results, threshold=2.2)
 
 ## Plot the cross-validated class probabilities by class
-pamr.plotcvprob(gender.results, gender.data, threshold=7.0)
+png("../figs/cvprob.png")
+pamr.plotcvprob(gender.results, gender.data, threshold=2.2)
+dev.off()
 
 ## Plot the class centroids
 # words that matters
-pamr.plotcen(gender.train, gender.data, threshold=2.0)
+pamr.plotcen(gender.train, gender.data, threshold=1.8)
 
 ## Make a gene plot of the most significant genes
 pamr.geneplot(gender.train, gender.data, threshold=3)
