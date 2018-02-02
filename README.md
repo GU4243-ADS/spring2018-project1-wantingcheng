@@ -113,5 +113,20 @@ Term: Spring 2018
   
   Eventually, I want to reach the goal of distinguishing between verbs that showed little value in separating the two gender and verbs that showed a strong association with one class or the other.
   
+### 4.1 What is Nearest Shrunken Centroids Classifier?
+
+  NSC classifier is originally a tool to diagnose multiple cancer types by examining their gene expression. Suppose we are given a sample of cancer cells as well as their numerical gene expression, the NSC classifier can identify a subset of genes that best characterizes each cancer type. More specifically, each class (or cancer type in this case) will have a class centroid with the subset of genes in it. Furthermore, the classifier has a choice to shrink the centroids, by which it gives higher weight to genes whose expression is stable within samples of the same class. The amount of shrinkage is called "threshold value". The larger the threshold value, the more genes are eliminated from the centroid.
   
+  Similar to the application of NSC classifier on cancer cells, I applied the NSC classifier on our corpus. In our case, gender class acts like cancer types, the extracted words that follow the pronouns act like genes, the number of times the words appeared in our corpus act like the numerical gene expressions. The sample cells corresponds to a combination of a gender and an author. For example, (MWS, female) will be a sample in our case, words like "throw" and "tell" will be genes, and the frequency that such words appear will be the gene expressions. The classifier thus can differentiate gender class by building a shrunken centroid for each gender using the word frequency.
+  
+  Here I provide a snapshot of the dataset to have a better idea of the input to the model:
+
+![chart](figs/data.png)
+
+  This is a dataframe with 8 columns and 1136 rows, with 1134 words serving as classification features of gender class.
+
+
+  
+  
+> The distribution of these verbs appeared to support existing scholarship on 19th century gender stereotypes; many of the verbs indicating a female pronoun are associated with emotion while many of the verbs indicating a male pronoun are associated with physical action and motion.
   
