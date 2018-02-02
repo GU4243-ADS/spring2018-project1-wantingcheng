@@ -138,9 +138,24 @@ Term: Spring 2018
 
   I find:
   
-  + We have a total of 6 samples and all samples have good separation between the highest and lower probability, demonstrating that the sample is unambiguously classified by the method.
+  + I have a total of 6 samples and all samples have good separation between the highest and lower probability, demonstrating that the sample is unambiguously classified by the method.
   
   + The male samples have lower probability compared to female samples, meaning that the feature of male samples is more ambiguous.
+  
+  
+  My next step is to screen out the words that the machine found most useful in differentiating between male and female pronouns. The rows are ranked from 1 to 24 based on how useful they were to the model.  The horizontal axis represent their log expression ratio with respect to the gender. The larger the ratio, the stronger connection between the word and the pronoun.
+  
+![chart](figs/g1.png)
+
+  A little bit of visualization of the previous graph:
+  
+![chart](figs/cloud.png)
+
+  I find:
+  
+  +
+  
+  
   
 > The distribution of these verbs appeared to support existing scholarship on 19th century gender stereotypes; many of the verbs indicating a female pronoun are associated with emotion while many of the verbs indicating a male pronoun are associated with physical action and motion.
   

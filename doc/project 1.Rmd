@@ -371,7 +371,20 @@ dev.off()
 
 ## Plot the class centroids
 # words that matters
-pamr.plotcen(gender.train, gender.data, threshold=1.8)
+png("../figs/g1.png",width = 500, height = 1000)
+pamr.plotcen(gender.train, gender.data, threshold=2.2)
+dev.off()
+
+ID <- data.frame(pamr.listgenes(gender.train, gender.data, threshold = 2.2))[,3]
+ID <- as.numeric(ID)
+wordlist <- c("said","who","read","would","held","took","came","seemed","was",
+              "yet","threatened","stretched","descended","bore","did","became",
+              "wished","drew","must","not","ceased","had","spoke","sat")
+png("../figs/cloud.png")
+wordcloud(wordlist,ID)
+dev.off()
+
+
 
 ## Make a gene plot of the most significant genes
 pamr.geneplot(gender.train, gender.data, threshold=3)
