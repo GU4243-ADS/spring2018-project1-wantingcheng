@@ -168,9 +168,13 @@ Term: Spring 2018
 
 ## 5. Conclusion
 
-  By the measures employed in this simple blog, I learned that there is a strong correlation between character gender and verbs in the 19th century horror novel. 
+  By the measures employed in this simple blog, I learned that there is a strong correlation between character gender and verbs in the 19th century horror novel. To answer the questions that I listed before performing the research, I have found that:
   
+  + MWS, the only female author among the three, talks much more frequently about female characters than the other two authors.
   
+  + It seems that female tends to have past tense in their action words, whereas male have more present tense words such as "may" and "can". What's more, male characters are more frequently portrayed from a **first person** perspective.
   
-> 
+  + The distribution of these verbs appeared to support existing scholarship on 19th century gender stereotypes; many of the verbs indicating a female pronoun are associated with emotion while many of the verbs indicating a male pronoun are associated with physical action and motion.
+  
+  + Applying cancer classification method on our corpus, I developed a way to differentiate between male sample and female sample, and a potential way to predict the gender of a given text.
   
