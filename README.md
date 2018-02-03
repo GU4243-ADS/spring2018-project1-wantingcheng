@@ -153,7 +153,13 @@ Term: Spring 2018
 
   I find:
   
-  +
+  + Comparing the word cloud to the graph in section 3, I noticed that many words appear in both graphs, eg. "who", "said", "wished", "drew", "came". This demonstrates that the result given by NSC classifier is somewhat similar to the EDA we did before. 
+  
+  + In section 3 these words are all paired more frequently with "he".
+  
+### How can the NSC classifier help us identify authors?
+
+  
   
   
   
