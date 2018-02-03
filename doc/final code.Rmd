@@ -279,8 +279,10 @@ dev.off()
 
 
 
-
+## 4. NSC experiments
 ```{r}
+# Reformatting our data file to meet the requirements of the pamr package.
+
 gender <- data_counts_by_author %>%
   spread(word1, counts, fill = 0)
 temp_male <- gender %>%
@@ -315,17 +317,18 @@ grid.draw(temp)
 dev.off()
 
 write.table(gender, "../data/pam.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
+
+# Input the data file into the package
 gender.data <- pamr.from.excel("../data/pam.txt", ncols = 8, sample.labels = TRUE)
 # train the model
 gender.train <- pamr.train(gender.data)
+# cross-validate the model
 gender.results <- pamr.cv(gender.train, gender.data)
 
 ## Plot the cross-validated error curves
 png("../figs/cv.png")
 pamr.plotcv(gender.results)
 dev.off()
-
-
 
 
 ## Compute the confusion matrix for a particular model (threshold=7.0)
@@ -337,11 +340,11 @@ pamr.plotcvprob(gender.results, gender.data, threshold=2.2)
 dev.off()
 
 ## Plot the class centroids
-# words that matters
+# These are the words that matters
 png("../figs/plotcen.png")
 pamr.plotcen(gender.train, gender.data, threshold=2.2)
 dev.off()
-## Make a gene plot of the most significant genes
+## Make a gene plot of the most significant words
 png("../figs/geneplot.png")
 pamr.geneplot(gender.train, gender.data, threshold=3)
 dev.off()
@@ -352,6 +355,7 @@ wordlist <- c("said","who","read","would","held","took","came","seemed","was",
               "yet","threatened","stretched","descended","bore","did","became",
               "wished","drew","must","not","ceased","had","spoke","sat")
 png("../figs/cloud.png")
+# Most useful words given by NSC
 wordcloud(wordlist,ID)
 dev.off()
 
