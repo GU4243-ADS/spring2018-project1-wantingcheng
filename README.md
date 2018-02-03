@@ -107,7 +107,7 @@ Term: Spring 2018
 
 ## 4. Experiments Using Gene Classifier
 
-  The analysis in part 3 used a rather simple functon to represent the relative use of words, that might distinguish between the characters of male and female. But I wonder if there are more subtle ways to distinguish between these verbs. Enlighed by this paper [quote], I ran a series of classification esperiments using the **nearest shrunken centroids classifier** (NSC). I chose this classifier because, as Jockers and Kirilloff	mention in their research, The NSC classifier has the advantage of being a highly interpretable classifier. 
+  The analysis in part 3 used a rather simple functon to represent the relative use of words, that might distinguish between the characters of male and female. But I wonder if there are more subtle ways to distinguish between these verbs. Enlighed by this paper [Understanding Gender and Character Agency in the 19th Century Novel](http://culturalanalytics.org/2016/12/understanding-gender-and-character-agency-in-the-19th-century-novel/), I ran a series of classification esperiments using the **nearest shrunken centroids classifier** (NSC). I chose this classifier because, as Jockers and Kirilloff	mention in their research, The NSC classifier has the advantage of being a highly interpretable classifier. 
   
 >  It not only returns class predictions and the probabilities associated with those predictions, but it performs feature selection and provides statistical data about which features were found to be most useful in the overall classification and which classes those features are most or least associated with.
   
@@ -178,3 +178,23 @@ Term: Spring 2018
   
   + Applying cancer classification method on our corpus, I developed a way to differentiate between male sample and female sample, and a potential way to predict the gender of a given text.
   
+
+## Reference
+
+ + [Treemap House of Horror - Spooky EDA/LDA/Features](https://www.kaggle.com/headsortails/treemap-house-of-horror-spooky-eda-lda-features/notebook)
+ 
+ + [Understanding Gender and Character Agency in the 19th Century Novel](http://culturalanalytics.org/2016/12/understanding-gender-and-character-agency-in-the-19th-century-novel/)
+ 
+ + [pamr package](https://cran.r-project.org/web/packages/pamr/pamr.pdf)
+ 
+ + [GENDER ROLES WITH TEXT MINING AND N-GRAMS](https://juliasilge.com/blog/gender-pronouns/)
+ 
+ + [What is nearest shrunken centroid classification?](http://statweb.stanford.edu/~tibs/PAM/Rdist/howwork.html)
+ 
+ + [Diagnosis of multiple cancer types by shrunken
+centroids of gene expression](http://www.pnas.org/content/pnas/99/10/6567.full.pdf)
+
+  + [Classification of microarray samples](http://statweb.stanford.edu/~tibs/PAM/Rdist/doc.pdf)
+  
+  + [Prediction Analysis of Microarrays for R: Installation Guide and Manual
+](http://statweb.stanford.edu/~tibs/PAM/Rdist/doc/readme.html)
