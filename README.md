@@ -145,7 +145,8 @@ Term: Spring 2018
   
   My next step is to screen out the words that the machine found most useful in differentiating between male and female pronouns. The rows are ranked from 1 to 24 based on how useful they were to the model.  The horizontal axis represent their log expression ratio with respect to the gender. The larger the ratio, the stronger connection between the word and the pronoun.
   
-![chart](figs/g1.png)
+![chart](figs/plotcv.png)
+![chart](figs/geneplot.png)
 
   The previous graph is carried out through the function `pamr.plotcen` and needs prettying. A little visualization of the previous graph is attached below. Words with larger fonts are the ones most useful in differentiating between male and female pronouns.
   
@@ -157,7 +158,7 @@ Term: Spring 2018
   
   + In section 3 these words are all paired more frequently with "he".
   
-### How can the NSC classifier help us identify authors?
+### 4.3 How can the NSC classifier help us identify authors?
 
   
   

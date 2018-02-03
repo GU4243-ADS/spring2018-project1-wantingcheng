@@ -357,10 +357,7 @@ dev.off()
 
 
 
-```
 
-
-```{r}
 ## Compute the confusion matrix for a particular model (threshold=7.0)
 pamr.confusion(gender.results, threshold=2.2)
 
@@ -371,8 +368,12 @@ dev.off()
 
 ## Plot the class centroids
 # words that matters
-png("../figs/g1.png",width = 500, height = 1000)
+png("../figs/plotcen.png")
 pamr.plotcen(gender.train, gender.data, threshold=2.2)
+dev.off()
+## Make a gene plot of the most significant genes
+png("../figs/geneplot.png")
+pamr.geneplot(gender.train, gender.data, threshold=3)
 dev.off()
 
 ID <- data.frame(pamr.listgenes(gender.train, gender.data, threshold = 2.2))[,3]
@@ -386,8 +387,7 @@ dev.off()
 
 
 
-## Make a gene plot of the most significant genes
-pamr.geneplot(gender.train, gender.data, threshold=3)
+
 
 
 
