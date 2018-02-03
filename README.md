@@ -159,8 +159,12 @@ Term: Spring 2018
   
   + In section 3 these words are all paired more frequently with "he".
   
-### 4.3 How can the NSC classifier help us identify authors?
+### 4.3 How can the NSC classifier help us identify genders?
 
+  Since our objective was not ultimately to predict likely pronoun genders from a set of verbs, but rather to understand the types of agency associated with male and female characters in the 19th-century horror novel, NSC was an effective model to deploy since it would distinguish between which verbs showed little value in separating the two gender classes and which verbs showed a strong association with one class or the other. 
+  
+  However, NSC could also be used to predict gender of a test set. Nearest centroid classification takes the action words of a new sample, and compares it to both of these gender centroids. The class whose centroid that it is closest to, in squared distance, is the predicted class for that new sample. If I had more time and more data, I could perform some prediction using NSC and see if it is in fact effective in predicting character gender.
+  
   
   
   
