@@ -144,9 +144,11 @@ equal <- word_ratios %>%
   mutate(abslogratio = abs(logratio)) %>%
   arrange(abslogratio)
 words <- equal$word2
-freqs <- equal$abslogratio
+freqs <- seq(69,1)
 
-wordcloud(words, freqs, max.words = 14, min.freq = -0.25, scale = c(4,.5), vfont = c("sans serif","plain"), color = c("purple4", "red4", "black"))
+png("../figs/eq.png")
+wordcloud(words, freqs, max.words = 30, vfont = c("sans serif","plain"), color = c("purple4", "red4", "black"))
+dev.off()
 
 # Large difference:
 
@@ -275,38 +277,6 @@ dev.off()
 
 ```
 
-
-
-
-# Future directions for research
-data cleaning:
-1. Look at type of sentence, punctuations
-2. n-gram instead of words; groups of words that represent a theme
-3. length of sentence in words; types of words like nouns, adjectives, etc.
-4. stemming/tization
-5. any information in the stop words; 
-6. studying the first and last words in the sentences
-7. HPL makes up a lot of words
-8. can we find specifically "british", "french" words for ms
-9. Sentence generation
-
-sentiment analysis:
-1. sentiment analysis at sentence level instead of word level. What proportion of the sentence is positive?
-2. k-means clusters on emotion, counts, or sentence. 
-3. Are the results from the other lexicons different?
-4. We're looking at the word counts for each emotion... is there some sort of normalization important here? eg. number of negative words in single sentence
-5. What are the top few emotions represented by each author and are they the same across the authors?
-6. Psycho profiles of the authors.
-
-topic modeling:
-1. visualizing author topics
-2. determining the number of topics
-3. topic model it at the corpus level, instead of sentence level.
-4. other algorithms other than LDA
-5. 
-
-
-**clustering analysis
 
 
 

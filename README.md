@@ -60,7 +60,7 @@ Term: Spring 2018
   
   First I arranged the words that have log ratios closest to 0 - these are the words that are perceived as "gender neutral".
   
-![image]
+![image](figs/eq.png)
 
 
   Next, I ranked the words that have largest absolute value of their log ratios - these are the words that are perceived as associated with male or female characters, disregarding which author wrote such words.
@@ -98,11 +98,11 @@ Term: Spring 2018
   
   I find:
   
-  +
+  + The upper part of the graph of HPL had many words with the same log ratio. This is probably due to the fact that HPL have so few usage of female pronoun and the words following "she" have the same frequency.
   
-  +
+  + The distribution of these verbs appeared to support existing scholarship on 19th century gender stereotypes; many of the verbs indicating a female pronoun are associated with emotion while many of the verbs indicating a male pronoun are associated with physical action and motion.
   
-  +
+  + Female characters in MWS's stories seem to like thowing things a lot, as "threw" appears after "she" 8 times more often than "he".
   
 
 ## 4. Experiments Using Gene Classifier
@@ -165,9 +165,12 @@ Term: Spring 2018
   
   However, NSC could also be used to predict gender of a test set. Nearest centroid classification takes the action words of a new sample, and compares it to both of these gender centroids. The class whose centroid that it is closest to, in squared distance, is the predicted class for that new sample. If I had more time and more data, I could perform some prediction using NSC and see if it is in fact effective in predicting character gender.
   
+
+## 5. Conclusion
+
+  By the measures employed in this simple blog, I learned that there is a strong correlation between character gender and verbs in the 19th century horror novel. 
   
   
   
-  
-> The distribution of these verbs appeared to support existing scholarship on 19th century gender stereotypes; many of the verbs indicating a female pronoun are associated with emotion while many of the verbs indicating a male pronoun are associated with physical action and motion.
+> 
   
