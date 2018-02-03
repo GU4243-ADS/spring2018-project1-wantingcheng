@@ -147,7 +147,7 @@ Term: Spring 2018
   
 ![chart](figs/g1.png)
 
-  A little bit of visualization of the previous graph:
+  The previous graph is carried out through the function `pamr.plotcen` and needs prettying. A little visualization of the previous graph is attached below. Words with larger fonts are the ones most useful in differentiating between male and female pronouns.
   
 ![chart](figs/cloud.png)
 
