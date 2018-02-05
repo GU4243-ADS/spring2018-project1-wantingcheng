@@ -127,12 +127,12 @@ Term: Spring 2018
   
 ### 4.2 Classification Experiments
 
-  I began with a cross validation experiment. This process is to find the training errors for different values of the shrinkage parameter, or threshold value. The goal of this experiment is to have an idea of what threshold value will give us the most satisfying effect. The graph below shows the results, from no shrinkage (Left) to complete shrinkage (Right). Both the cross-validated and test error were minimized near 2.2, which is the value we used as threshold. The upper axis shows the number of active words. At 2.2, there are about 25 active words.
+  I began with a cross validation experiment. This process is to find the training errors for different values of the shrinkage parameter, or threshold value. The goal of this experiment is to have an idea of what threshold value will give us the most satisfying effect. The graph below shows the results, from no shrinkage (Left) to complete shrinkage (Right). Both the cross-validated and test error were minimized near 1.8, which is the value we used as threshold. The upper axis shows the number of active words. At 1.8, there are about 47 active words.
 
 ![chart](figs/cv.png)  
 
 
-  Having selected the threshold value = 2.2, I can then use the function `pamr.plotcvprob` to construct estimates of the class probabilities, as shown in the graph below. The graph displays the calculated probabilities for the training data to be inside either class. 
+  Having selected the threshold value = 1.8, I can then use the function `pamr.plotcvprob` to construct estimates of the class probabilities, as shown in the graph below. The graph displays the calculated probabilities for the training data to be inside either class. 
   
 ![chart](figs/cvprob.png)
 

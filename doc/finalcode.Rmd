@@ -1,6 +1,9 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Project 1"
+output:
+  pdf_document: default
+  html_notebook: default
+  html_document: default
 ---
 
 ## 1. Data Preparation
