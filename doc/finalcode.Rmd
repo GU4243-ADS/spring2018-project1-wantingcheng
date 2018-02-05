@@ -1,9 +1,9 @@
 ---
 title: "Project 1"
 output:
-  pdf_document: default
-  html_notebook: default
   html_document: default
+  html_notebook: default
+  pdf_document: default
 ---
 
 ## 1. Data Preparation
@@ -81,13 +81,13 @@ all_po <- all_po %>%
   rename(counts = "n",
          pronouns = "word1")
 
-png("../figs/po1.png")
+# png("../figs/po1.png")
 ggplot(all_po, aes(x="", y=counts, fill=pronouns))+
   geom_bar(width = 1, stat = "identity")+
   coord_polar("y", start = 0) +
   ggtitle("pronoun occurence in total")
 
-dev.off()
+# dev.off()
 
 data_counts_by_author <- data %>%
   count(author, word, sort = TRUE) %>%
@@ -123,9 +123,9 @@ p3 <- ggplot(EAP_po, aes(x="", y=counts, fill=pronoun))+
   ggtitle("EAP pronoun occurence")
 
 layout <- matrix(c(1,2,3), 3,1, byrow = TRUE)
-png("../figs/po2.png")
+# png("../figs/po2.png")
 multiplot(p1, p2, p3, layout = layout)
-dev.off()
+# dev.off()
 
 ```
 
@@ -149,13 +149,13 @@ equal <- word_ratios %>%
 words <- equal$word2
 freqs <- seq(69,1)
 
-png("../figs/eq.png")
+# png("../figs/eq.png")
 wordcloud(words, freqs, max.words = 30, vfont = c("sans serif","plain"), color = c("purple4", "red4", "black"))
-dev.off()
+# dev.off()
 
 # Large difference:
 
-png("../figs/verbs1.png")
+# png("../figs/verbs1.png")
 word_ratios %>%
     mutate(abslogratio = abs(logratio)) %>%
     group_by(logratio < 0) %>%
@@ -176,7 +176,7 @@ word_ratios %>%
     scale_y_continuous(breaks = seq(-3, 3),
                        labels = c("0.125x", "0.25x", "0.5x", 
                                   "Same", "2x", "4x", "8x"))
-dev.off()
+# dev.off()
 
 # Separately:
 # EAP
@@ -196,7 +196,7 @@ EAP_word_ratios <- data_counts_by_author %>%
   ungroup() %>%
   mutate(word = reorder(word2, logratio))
 
-jpeg("../figs/EAPverbs.jpeg", quality = 100)
+# jpeg("../figs/EAPverbs.jpeg", quality = 100)
 ggplot(EAP_word_ratios, aes(word, logratio, color = logratio < 0)) +
   geom_segment(aes(x=word, xend = word,
                    y = 0, yend = logratio),
@@ -210,7 +210,7 @@ ggplot(EAP_word_ratios, aes(word, logratio, color = logratio < 0)) +
   scale_y_continuous(breaks = seq(-3, 3),
                      labels = c("0.125x", "0.25x", "0.5x", 
                                 "Same", "2x", "4x", "8x"))
-dev.off()
+# dev.off()
 
 # HPL
 
@@ -229,7 +229,7 @@ HPL_word_ratios <- data_counts_by_author %>%
   ungroup() %>%
   mutate(word = reorder(word2, logratio))
 
-jpeg("../figs/HPLverbs.jpeg", quality = 100)
+# jpeg("../figs/HPLverbs.jpeg", quality = 100)
 ggplot(HPL_word_ratios, aes(word, logratio, color = logratio < 0)) +
   geom_segment(aes(x=word, xend = word,
                    y = 0, yend = logratio),
@@ -243,7 +243,7 @@ ggplot(HPL_word_ratios, aes(word, logratio, color = logratio < 0)) +
   scale_y_continuous(breaks = seq(-3, 3),
                      labels = c("0.125x", "0.25x", "0.5x", 
                                 "Same", "2x", "4x", "8x"))
-dev.off()
+# dev.off()
  
 # MWS
 
@@ -262,7 +262,7 @@ MWS_word_ratios <- data_counts_by_author %>%
   ungroup() %>%
   mutate(word = reorder(word2, logratio))
 
-jpeg("../figs/MWSverbs.jpeg", quality = 100)
+# jpeg("../figs/MWSverbs.jpeg", quality = 100)
 ggplot(MWS_word_ratios, aes(word, logratio, color = logratio < 0)) +
   geom_segment(aes(x=word, xend = word,
                    y = 0, yend = logratio),
@@ -276,7 +276,7 @@ ggplot(MWS_word_ratios, aes(word, logratio, color = logratio < 0)) +
   scale_y_continuous(breaks = seq(-3, 3),
                      labels = c("0.125x", "0.25x", "0.5x", 
                                 "Same", "2x", "4x", "8x"))
-dev.off()
+# dev.off()
 
 ```
 
@@ -315,9 +315,9 @@ gender <- t(gender)
 # Draw a graph of the table to get an idea of how it looks like
 temp <- tableGrob(head(gender))
 grid.newpage()
-png("../figs/data.png")
+# png("../figs/data.png")
 grid.draw(temp)
-dev.off()
+# dev.off()
 
 write.table(gender, "../data/pam.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
 
@@ -329,38 +329,38 @@ gender.train <- pamr.train(gender.data)
 gender.results <- pamr.cv(gender.train, gender.data)
 
 ## Plot the cross-validated error curves
-png("../figs/cv.png")
+# png("../figs/cv.png")
 pamr.plotcv(gender.results)
-dev.off()
+# dev.off()
 
 
 ## Compute the confusion matrix for a particular model (threshold=7.0)
 pamr.confusion(gender.results, threshold=2.2)
 
 ## Plot the cross-validated class probabilities by class
-png("../figs/cvprob.png")
+# png("../figs/cvprob.png")
 pamr.plotcvprob(gender.results, gender.data, threshold=2.2)
-dev.off()
+# dev.off()
 
 ## Plot the class centroids
 # These are the words that matters
-png("../figs/plotcen.png")
+# png("../figs/plotcen.png")
 pamr.plotcen(gender.train, gender.data, threshold=2.2)
-dev.off()
+# dev.off()
 ## Make a gene plot of the most significant words
-png("../figs/geneplot.png")
+# png("../figs/geneplot.png")
 pamr.geneplot(gender.train, gender.data, threshold=3)
-dev.off()
+# dev.off()
 
 ID <- data.frame(pamr.listgenes(gender.train, gender.data, threshold = 2.2))[,3]
 ID <- as.numeric(ID)
 wordlist <- c("said","who","read","would","held","took","came","seemed","was",
               "yet","threatened","stretched","descended","bore","did","became",
               "wished","drew","must","not","ceased","had","spoke","sat")
-png("../figs/cloud.png")
+# png("../figs/cloud.png")
 # Most useful words given by NSC
 wordcloud(wordlist,ID)
-dev.off()
+# dev.off()
 
 
 
