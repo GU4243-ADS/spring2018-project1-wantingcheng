@@ -1,5 +1,6 @@
 ---
 title: "Project 1"
+author: Wanting Cheng
 output:
   html_document: default
   html_notebook: default
